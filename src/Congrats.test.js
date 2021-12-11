@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import EnzymeAdapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { findByTestAttr } from '../test/testUtils';
+
+import { findByTestAttr, checkProps } from '../test/testUtils';
 import Congrats from './Congrats';
 
 
@@ -28,6 +29,8 @@ test('renders non-empty congrats message when `success` prop is true', () => {
     expect(message.text().length).not.toBe(0);
 })
 
-test('does not throw warning with expected props', () => {
+test('does not throw warning with expected props', () => { 
+    const expectedProps = { success: false };
+    checkProps(Congrats, expectedProps);
     
 })
