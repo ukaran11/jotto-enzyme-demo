@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 export default function Congrats( props ) {
         if(props.success) {
             return (
