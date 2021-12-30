@@ -1,13 +1,18 @@
 import React from 'react'
 import Congrats from './Congrats';
 import GuessedWords from './GuessedWords';
+import './App.css';
 
 const App = () => {
   return (
-    <div className='App'>
+    <div className='container'>
       <h1>Jotto</h1>
-      <Congrats success={false}/>
-      <GuessedWords guessedWords={[]}/>
+      <Congrats success={true}/>
+      <GuessedWords 
+        guessedWords={[ 
+          { guessedWord: 'train', letterMatchCount: 3} 
+        ]}
+      />
     </div>
   )
 }
