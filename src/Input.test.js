@@ -12,15 +12,28 @@ import Input from './Input';
 // }))
 
 
-const setup = (secretWord='party') => {
-    return shallow(<Input secretWord={secretWord}/>);
+const setup = (success=false, secretWord='party') => {
+    return shallow(<Input success={success} secretWord={secretWord}/>);
 }
 
-test('Input renders without error', () => {
-    const wrapper = setup();
-    const inputComponent = findByTestAttr(wrapper, 'component-input');
-    expect(inputComponent.length).toBe(1);
+describe('render', () => {
+
+    describe('success is true', () => {
+        
+        test('Input renders without error', () => {
+            const wrapper = setup();
+            const inputComponent = findByTestAttr(wrapper, 'component-input');
+            expect(inputComponent.length).toBe(1);
+        });
+
+    });
+
+    describe('success is false', () => {
+
+    });
 });
+
+
 
 test('does not throw warning with expected props', () => {
     checkProps(Input, { secretWord: 'party'})
