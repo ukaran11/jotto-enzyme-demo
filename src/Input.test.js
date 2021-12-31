@@ -5,11 +5,12 @@ import { checkProps, findByTestAttr } from '../test/testUtils';
 import Input from './Input';
 
 // mock entire module for destructuring useState on inmport 
-const mockSetCurrentGuess = jest.fn();
-jest.mock('react', () => ({
-    ...jest.requireActual('react'),
-    useState: (initialState) => [initialState, mockSetCurrentGuess]
-}))
+// const mockSetCurrentGuess = jest.fn();
+// jest.mock('react', () => ({
+//     ...jest.requireActual('react'),
+//     useState: (initialState) => [initialState, mockSetCurrentGuess]
+// }))
+
 
 const setup = (secretWord='party') => {
     return shallow(<Input secretWord={secretWord}/>);
@@ -26,12 +27,25 @@ test('does not throw warning with expected props', () => {
 });
 
 describe('state controlled input field', () => {
+
+    let mockSetCurrentGuess = jest.fn();
+    let wrapper;
+    let originalUseState;
+    beforeEach(() => {
+        mockSetCurrentGuess.mockClear();
+        originalUseState = React.useState;
+        React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
+        wrapper = setup();
+    });
+
+    afterEach(() => {
+        React.useState = originalUseState;
+    });
     
     test('state updates with value of input box upon changes', () => {
         // const mockSetCurrentGuess = jest.fn();
         // React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
 
-        const wrapper = setup();
         const inputBox = findByTestAttr(wrapper, 'input-box');
 
         // Simulated a change event to input box
@@ -45,10 +59,9 @@ describe('state controlled input field', () => {
         // const mockSetCurrentGuess = jest.fn();
         // React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
 
-        const wrapper = setup();
         const submitButton = findByTestAttr(wrapper, 'submit-button');
 
-        submitButton.simulate('click');
+        submitButton.simulate('click', { preventDefault() {} });
         expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
     })
 })
