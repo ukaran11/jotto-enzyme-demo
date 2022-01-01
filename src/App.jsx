@@ -5,7 +5,7 @@ import './App.css';
 
 const App = () => {
   return (
-    <div className='container'>
+    <div data-test="component-app" className='container'>
       <h1>Jotto</h1>
       <Congrats success={true}/>
       <GuessedWords 
