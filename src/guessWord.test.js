@@ -22,7 +22,7 @@ const setup = (state = {}) => {
 //     test.todo('guessedwords table does not get another row');
 // })
 
-describe('no words guessed', () => {
+describe.skip('no words guessed', () => {
     
     let wrapper;
     beforeEach(() => {
@@ -40,7 +40,7 @@ describe('no words guessed', () => {
 
 });
 
-describe('some words guessed', () => {
+describe.skip('some words guessed', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({
@@ -57,7 +57,7 @@ describe('some words guessed', () => {
     
 });
 
-describe('guessed secret word', () => {
+describe.skip('guessed secret word', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({
