@@ -1,7 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-
-import { checkProps, findByTestAttr } from '../test/testUtils';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import { checkProps, findByTestAttr, storeFactory } from '../test/testUtils';
 import Input from './Input';
 
 // mock entire module for destructuring useState on inmport 
@@ -12,8 +12,9 @@ import Input from './Input';
 // }))
 
 
-const setup = (success=false, secretWord='party') => {
-    return shallow(<Input success={success} secretWord={secretWord}/>);
+const setup = (initialState={}, secretWord='party') => {
+    const store = storeFactory(initialState);
+    return mount(<Provider store={store}><Input secretWord={secretWord}/></Provider>);
 }
 
 describe('render', () => {
@@ -22,7 +23,7 @@ describe('render', () => {
 
         let wrapper;
         beforeEach(() => {
-            wrapper = setup(true);
+            wrapper = setup({ success: true});
         });
 
         test('Input renders without error', () => {
@@ -47,7 +48,7 @@ describe('render', () => {
 
         let wrapper;
         beforeEach(() => {
-            wrapper = setup(false);
+            wrapper = setup({ success: false});
         });
 
         test('Input renders without error', () => {
@@ -83,7 +84,7 @@ describe('state controlled input field', () => {
         mockSetCurrentGuess.mockClear();
         originalUseState = React.useState;
         React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
-        wrapper = setup();
+        wrapper = setup({ success: false });
     });
 
     afterEach(() => {
