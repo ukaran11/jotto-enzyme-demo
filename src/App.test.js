@@ -3,6 +3,10 @@ import { findByTestAttr } from '../test/testUtils';
 
 import App from './App';
 
+// active global mock to make sure getSecretWord doesn't make network call
+jest.mock('./actions');
+import { getSecretWord as mockGetSecretWord } from './actions';
+
 const setup = () => {
     return shallow(<App />);
 };
