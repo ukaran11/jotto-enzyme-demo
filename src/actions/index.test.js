@@ -23,7 +23,7 @@ describe('getSecretWord', () => {
         // update to test app in Redux / context sections
         return getSecretWord()
             .then((secretWord) => {
-                console.log(secretWord)
+                // console.log(secretWord)
                 expect(secretWord).toBe('party');
             });
     });
