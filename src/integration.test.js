@@ -61,12 +61,24 @@ describe('guessWord action dispatcher', () => {
                     ...guessedWords,
                     { guessedWord: unsuccessfulGuess, letterMatchCount: 3}
                 ]
-            }
+            };
+
             expect(newState).toEqual(expectedState);
         });
 
         test('updates state correctly for successful guess', () => {
+            store.dispatch(guessWord(secretWord));
+            const newState = store.getState();
+            const expectedState = {
+                secretWord,
+                success: true,
+                guessedWords: [
+                    ...guessedWords,
+                    { guessedWord: secretWord, letterMatchCount: 5}
+                ]
+            };
 
+            expect(newState).toEqual(expectedState);
         });
     })
 });
