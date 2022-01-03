@@ -12,7 +12,6 @@ const setup = (initialState = {}) => {
     const store = storeFactory(initialState);
 
     const wrapper = mount(<Provider store={store}><App /></Provider>);
-    console.log(wrapper.debug());
 
     // add value to the input box
     const inputBox = findByTestAttr(wrapper, 'input-box');
@@ -95,7 +94,10 @@ describe('guessed secret word', () => {
     });
 
     test('does not display input component contents', () => {
-        const inputBox = findByTestAttr(wrapper, 'submit-button');
+        const inputBox = findByTestAttr(wrapper, 'input-box');
+        expect(inputBox.exists()).toBe(false);
+
+        const submitButton = findByTestAttr(wrapper, 'submit-button');
         expect(submitButton.exists()).toBe(false);
     });
     
