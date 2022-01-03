@@ -1,12 +1,19 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
 
 import App from './App';
-import { findByTestAttr } from '../test/testUtils';
+import { findByTestAttr, storeFactory } from '../test/testUtils';
 
-const setup = (state = {}) => {
-    const wrapper = mount(<App />);
+// active global mock to make sure getSecretWord doesn't make network call
+jest.mock('./actions');
+
+const setup = (initialState = {}) => {
+    const store = storeFactory(initialState);
+
+    const wrapper = mount(<Provider store={store}><App /></Provider>);
     console.log(wrapper.debug());
+
     // add value to the input box
     const inputBox = findByTestAttr(wrapper, 'input-box');
     inputBox.simulate('change', { target: { value: 'train' } });
@@ -22,7 +29,7 @@ const setup = (state = {}) => {
 //     test.todo('guessedwords table does not get another row');
 // })
 
-describe.skip('no words guessed', () => {
+describe('no words guessed', () => {
     
     let wrapper;
     beforeEach(() => {
@@ -40,7 +47,7 @@ describe.skip('no words guessed', () => {
 
 });
 
-describe.skip('some words guessed', () => {
+describe('some words guessed', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({
@@ -57,7 +64,7 @@ describe.skip('some words guessed', () => {
     
 });
 
-describe.skip('guessed secret word', () => {
+describe('guessed secret word', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({
