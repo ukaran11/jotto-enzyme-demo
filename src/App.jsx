@@ -12,7 +12,7 @@ const App = () => {
   const success = useSelector(state => state.success);
   const guessedWords = useSelector(state => state.guessedWords);
   const secretWord = useSelector(state => state.secretWord);
-
+  // test 
   useEffect(() => {
     dispatch(getSecretWord());
   }, [])
