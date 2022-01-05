@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Congrats from './Congrats';
 import GuessedWords from './GuessedWords';
@@ -8,8 +8,8 @@ import { getSecretWord } from './actions';
 
 const App = () => {
   // console.log("test change for new branch context-start");
+  const [secretWord, setSecretWord] = useState();
   const success = false;
-  const secretWord = 'party';
   const guessedWords  = [];
 
   useEffect(() => {
