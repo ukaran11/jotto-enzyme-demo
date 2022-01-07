@@ -22,6 +22,7 @@ export const guessWord = (guessedWord) => {
             dispatch({ type: actionTypes.CORRECT_GUESS });
         };
     };
+    // test
 };
 
 // export const correctGuess = () => {
