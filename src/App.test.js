@@ -22,7 +22,7 @@ test('renders without error', () => {
 });
 
 describe('get secret word', () => {
-    // test
+    
   beforeEach(() => {
     // clear the mock calls from the previous tests
     mockGetSecretWord.mockClear();
