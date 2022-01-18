@@ -112,6 +112,6 @@ describe('state controlled input field', () => {
 
         submitButton.simulate('click', { preventDefault() {} });
         expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
-        // test
+        
     })
 })
